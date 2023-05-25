@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body>
-    <h1 class="text-3xl font-bold underline">Hurray our server is serving with ejs</h1>
-  </body>
-</html>
+<%- include("layout/header.ejs") %>
+<main>
+  <form action="/" method="post">
+    <input type="text" name="pLanguage" placeholder="programming language" />
+
+    <button type="submit">Add</button>
+  </form>
+  <ul>
+    <% if(pLangs.length > 0){ %> <% for(let i = 0; i < pLangs.length; i++){ %>
+
+    <li><%=pLangs[i] %></li>
+    <% } %> <%} else { %>
+    <p>No programming language</p>
+    <% } %>
+  </ul>
+</main>
+<%- include("layout/footer.ejs") %>

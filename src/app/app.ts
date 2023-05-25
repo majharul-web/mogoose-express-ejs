@@ -16,11 +16,23 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static("public"));
+
 // db connection
 dbConnect();
 
+const pLangs: string[] = [];
+
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { pLangs });
+});
+app.post("/", (req, res) => {
+  const { pLanguage } = req.body;
+  pLangs.push(pLanguage);
+  res.redirect("/");
+});
+app.get("/about", (req, res) => {
+  res.render("about");
 });
 
 // Routes
