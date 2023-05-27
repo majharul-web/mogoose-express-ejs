@@ -3,6 +3,9 @@ import cors from "cors";
 import "dotenv/config";
 import dbConnect from "./utils/dbconnect";
 import productRouter from "./modules/Product/product.route";
+import userRouter from "./modules/User/user.route";
+import { errorHandler } from "./utils/errorHandler";
+import { checkedLogin } from "./utils/checkedLogin";
 
 const app: Application = express();
 
@@ -36,6 +39,9 @@ app.get("/about", (req, res) => {
 });
 
 // Routes
-app.use("/api/v1/products", productRouter);
+app.use("/api/v1/products",checkedLogin, productRouter);
 
+app.use("/api/v1/user", userRouter);
+
+app.use(errorHandler);
 export default app;

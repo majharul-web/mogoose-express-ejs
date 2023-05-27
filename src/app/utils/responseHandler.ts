@@ -4,12 +4,14 @@ interface IAPIResponse {
   success: boolean;
   data?: any;
   error?: any;
+  message?: string;
 }
 
 export const sendApiResponse = (
   res: Response,
   statusCode: number,
   success: boolean,
+  message?: string,
   data?: any,
   error?: any
 ): void => {
@@ -19,6 +21,9 @@ export const sendApiResponse = (
   }
   if (error) {
     apiResponse.error = error;
+  }
+  if (message) {
+    apiResponse.message = message;
   }
   res.status(statusCode).send(apiResponse);
 };
